@@ -41,13 +41,14 @@ if args.op == 'seq_con':
 
 	##load fasta sequence (AlignIO.parse returns a MSA as an interator, to get
 	#access to seperate sequences it has to be saved into a list)
-	with open(args.out_filename, 'w') as output_handle:
-		#convert and write out sequence file
-		alignment = AlignIO.read(input_handle, args.in_form)
-		seq_out = AlignIO.write(alignment, output_handle, args.out_form)
-		#some alignment stats output automatically
-		print('Alignment length is %i' % alignment.get_alignment_length())
-		print('%i sequences in alignment' % len(alignment))
+	with open(args.in_filename, 'r') as input_handle:
+		with open(args.out_filename, 'w') as output_handle:
+			#convert and write out sequence file
+			alignment = AlignIO.read(input_handle, args.in_form)
+			seq_out = AlignIO.write(alignment, output_handle, args.out_form)
+			#some alignment stats output automatically
+			print('Alignment length is %i' % alignment.get_alignment_length())
+			print('%i sequences in alignment' % len(alignment))
 
 	#if args.fastq:
 
