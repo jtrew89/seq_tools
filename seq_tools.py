@@ -30,39 +30,53 @@ parser.add_argument('-f', '--isolate_id_list', dest='id_file', help= "single col
 parser.add_argument('-o', '--output', dest='out_filename', help='name of output file, including extension', required = 'seq_con' in sys.argv or 'seq_tranc' in sys.argv or 'seq_tranl' in sys.argv) #conditional argument based on prior arguments
 parser.add_argument('-st', '--sequence_type', dest='seq_type', help='sequence type of the input file: dna, rna', required = 'seq_tranc' in sys.argv) #conditional argument based on prior arguments
 
-
 args = parser.parse_args()
 
 ##set working directory
 os.chdir(args.directory)
 
+##Create seq_tools class
+class SeqTools:
+
+	##initialise class
+	def __init__(self,in_seq, out_seq, in_form, out_form):
+		self.in_seq = in_seq
+		self.out_seq = out_seq
+		self.in_form = in_form
+		self.out_form = out_form
+
+	##sequence conversion functions
+	def seq_con(self,seq):
+
+		##load fasta sequence (AlignIO.parse returns a MSA as an interator, to get
+		#access to seperate sequences it has to be saved into a list)
+		if args.out_directory:
+			os.chdir(args.out_directory)
+			with open(args.in_filename, 'r') as input_handle:
+				with open(args.out_filename, 'w') as output_handle:
+					#convert and write out sequence file
+					alignment = AlignIO.read(input_handle, args.in_form)
+					seq_out = AlignIO.write(alignment, output_handle, args.out_form)
+					#some alignment stats output automatically
+					print('Alignment length is %i' % alignment.get_alignment_length())
+					print('%i sequences in alignment' % len(alignment))
+	
+		else:
+			with open(args.in_filename, 'r') as input_handle:
+				with open(args.out_filename, 'w') as output_handle:
+					#convert and write out sequence file
+					alignment = AlignIO.read(input_handle, args.in_form)
+					seq_out = AlignIO.write(alignment, output_handle, args.out_form)
+					#some alignment stats output automatically
+					print('Alignment length is %i' % alignment.get_alignment_length())
+					print('%i sequences in alignment' % len(alignment))
+	
+		#if args.fastq:
+
 ##opperation selection
 if args.op == 'seq_con':
 
-	##load fasta sequence (AlignIO.parse returns a MSA as an interator, to get
-	#access to seperate sequences it has to be saved into a list)
-	if args.out_directory:
-		os.chdir(args.out_directory)
-		with open(args.in_filename, 'r') as input_handle:
-			with open(args.out_filename, 'w') as output_handle:
-				#convert and write out sequence file
-				alignment = AlignIO.read(input_handle, args.in_form)
-				seq_out = AlignIO.write(alignment, output_handle, args.out_form)
-				#some alignment stats output automatically
-				print('Alignment length is %i' % alignment.get_alignment_length())
-				print('%i sequences in alignment' % len(alignment))
-
-	else:
-		with open(args.in_filename, 'r') as input_handle:
-			with open(args.out_filename, 'w') as output_handle:
-				#convert and write out sequence file
-				alignment = AlignIO.read(input_handle, args.in_form)
-				seq_out = AlignIO.write(alignment, output_handle, args.out_form)
-				#some alignment stats output automatically
-				print('Alignment length is %i' % alignment.get_alignment_length())
-				print('%i sequences in alignment' % len(alignment))
-
-	#if args.fastq:
+	
 
 elif args.op == 'seq_sel':
 
