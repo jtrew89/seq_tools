@@ -26,7 +26,7 @@ parser.add_argument('-ot', '--output_format', dest='out_form', help="alignment f
 #parser.add_argument('-od', '--output_directory', dest='out_directory', help='specify directory for output file if different')
 parser.add_argument('-1', '--op', dest='op', help='specify operation you wish to be carried out (seqeunce conversion = seq_con; sequence selection = seq_sel; list sequences = seq_lst; change to RNA = seq_tranl; change to prot = seq_tranc; sequence lengths = seq_len (if you do not give a out_filename it will print to screen...)', required=True)
 parser.add_argument('-s', '--isolate_id', dest='id', help= 'id of fasta sequence you wish to extract', required = 'seq_sel' in sys.argv and '-f' not in sys.argv) #conditional argument based on prior arguments
-parser.add_argument('-f', '--isolate_id_list', dest='id_file', help= "single column text file with sequences ids you wish to select. Ensure header is 'ids'", required = 'seq_sel' in sys.argv and '-s' not in sys.argv) #conditional argument based on prior arguments
+parser.add_argument('-f', '--isolate_id_list', dest='id_file', help= "single column text file with sequences ids you wish to select. Ensure header is titled 'ids'", required = 'seq_sel' in sys.argv and '-s' not in sys.argv) #conditional argument based on prior arguments
 parser.add_argument('-o', '--output', dest='out_filename', help='name of output file, including extension', required = 'seq_con' in sys.argv or 'seq_tranc' in sys.argv or 'seq_tranl' in sys.argv) #conditional argument based on prior arguments
 parser.add_argument('-st', '--sequence_type', dest='seq_type', help='sequence type of the input file: dna, rna', required = 'seq_tranc' in sys.argv) #conditional argument based on prior arguments
 
