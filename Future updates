@@ -1,0 +1,4 @@
+Extra opporations:
+-Selecting subsequence from all sequences given gff file
+-Select sequences smaller than of=r bigger than. Seperate in separate files
+-Renaming IDs of particular isolates or general patten across all.
