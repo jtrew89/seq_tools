@@ -23,9 +23,10 @@ Example command:
 seq_tools.py -d ./ -i seq_test.fasta -t fasta -1 seq_tranc -o tranc_test.fasta -ot fasta -st dna
 ```
 
-Script help file:
+The input above takes a fasta file called 'seq_test.fasta' from the current directory and outputs a transcribed file called 'tranc_test.fasta'. Both in fasta format.
+
+Script parameters:
 ```
--h, --help            show this help message and exit
 -d DIRECTORY, --working_directory DIRECTORY
                         directory input file(s) are kept in
 -i IN_FILENAME, --input IN_FILENAME
