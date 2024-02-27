@@ -16,7 +16,7 @@ import sys
 
 ##set up arguments
 parser = argparse.ArgumentParser(description=(
-	'Sequence conversion script. Specify formats/types in lower case. Formats accepted: fasta, clustal, emboss, nexus, phylip, phylip-sequential and phylip-relaxed'
+	'Sequence manipulation script. Specify formats/types in lower case. Formats accepted: fasta, clustal, emboss, nexus, phylip, phylip-sequential and phylip-relaxed. Outputfiles will be saved to the working directory'
 						)
 				)
 parser.add_argument('-d', '--working_directory', dest='directory', help='directory input file(s) are kept in', required=True)
